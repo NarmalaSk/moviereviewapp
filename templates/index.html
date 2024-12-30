@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Opinion Sentiment Analysis</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #4CAF50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Sentiment result styling */
+        .result {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result h2 {
+            color: #4CAF50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            font-size: 18px;
+            color: #777;
+        }
+
+        /* Review List styling */
+        .reviews {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .reviews ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .reviews li {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            form, .result, .reviews {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Opinion Sentiment Analysis</h1>
+    <form action="/predict" method="POST">
+        <label for="review">Enter Your Opinion:</label>
+        <textarea id="review" name="review" rows="4" cols="50" required placeholder="Share your opinion on the movie"></textarea>
+        <button type="submit">Analyze Opinion</button>
+    </form>
+
+    {% if sentiment %}
+        <div class="result">
+            <h2>Opinion Sentiment:</h2>
+            <p>{{ sentiment }}</p>
+            <p>Score: {{ score }}</p>
+        </div>
+    {% endif %}
+
+    {% if reviews %}
+        <div class="reviews">
+            <h2>Movie Reviews:</h2>
+            <ul>
+                {% for review in reviews %}
+                    <li><strong>Review:</strong> {{ review.review }} <br><strong>Sentiment:</strong> {{ review.sentiment }} <br><strong>Score:</strong> {{ review.score }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>
