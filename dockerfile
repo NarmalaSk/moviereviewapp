@@ -14,10 +14,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port Flask will run on
-EXPOSE 5000
+EXPOSE 8080
 
 # Set the entrypoint to run the Flask app using Gunicorn (for production use)
-ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
 
 # If you want to run with Flask's built-in server (for development), use this instead:
 # ENTRYPOINT ["python", "app.py"]
