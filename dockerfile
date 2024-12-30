@@ -16,8 +16,6 @@ COPY . .
 # Expose the port Flask will run on
 EXPOSE 8080
 
-# Set the entrypoint to run the Flask app using Gunicorn (for production use)
-ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
 
 # If you want to run with Flask's built-in server (for development), use this instead:
-# ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["python", "app.py"]
